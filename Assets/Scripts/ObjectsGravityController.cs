@@ -43,11 +43,6 @@ public class ObjectsGravityController : MonoBehaviour {
             return;
         }
 
-
-
-
-        
-
         foreach (ObjectsOnGravity objects in gravityObjectsList)
         {
             gotRB = objects.getRB();
@@ -56,9 +51,12 @@ public class ObjectsGravityController : MonoBehaviour {
 
             // 흰색의 영역에 물체가 존재할 경우
             if (objects.returnLocatedArea() == WHITE)
-            {
-                // 왼족으로 중력 설정
-                objects.addToGravityVelocity(gravityModifier * Physics2D.gravity * Time.deltaTime);
+            {   
+                if (objects.checkIsOnGround())
+                    continue;
+
+                // 왼쪽으로 중력 설정
+                objects.addToGravityVelocity(- (gravityModifier * Physics2D.gravity * Time.deltaTime));
                 Vector2 deltaPosition = objects.getGravityVelocity() * Time.deltaTime;
                 Vector2 move = Vector2.left * deltaPosition.y;
                 gotRB.position = gotRB.position + move;
@@ -68,8 +66,11 @@ public class ObjectsGravityController : MonoBehaviour {
             // 검은 영역에 물체가 존재할 경우
             else
             {
+                if (objects.checkIsOnGround())
+                    continue;
+
                 // 오른쪽으로 중력 설정
-                objects.addToGravityVelocity(- (gravityModifier * Physics2D.gravity * Time.deltaTime));
+                objects.addToGravityVelocity(gravityModifier * Physics2D.gravity * Time.deltaTime);
                 Vector2 deltaPosition = objects.getGravityVelocity() * Time.deltaTime;
                 Vector2 move = Vector2.left * deltaPosition.y;
                 gotRB.position = gotRB.position + move;

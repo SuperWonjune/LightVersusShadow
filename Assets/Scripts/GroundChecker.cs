@@ -14,7 +14,6 @@ public class GroundChecker : MonoBehaviour {
 		
 	}
 
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         // player 접촉시

@@ -13,15 +13,11 @@ public class ObjectsOnGravity : MonoBehaviour {
 
     protected Rigidbody2D rb2D;
 
-
-
     private bool isOnGround = false;
     // Located Area
     // 0 -> white space
     // 1 -> black space
     private int locatedArea = WHITE;
-
-
     private Vector2 gravityVelocity;
 
 

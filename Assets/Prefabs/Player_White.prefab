@@ -99,9 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49ff2301947b4a4c9526f6db34860c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsGravityController: {fileID: 0}
+  objectsGravityController: {fileID: 114141378410545780, guid: 73831d7a1006aec47bf3871e38900007,
+    type: 2}
   playerIndex: 2
   speed: 3
+  shot: {fileID: 0}
+  shotSpawn: {fileID: 0}
+  fireRate: 0
 --- !u!212 &212658442404466108
 SpriteRenderer:
   m_ObjectHideFlags: 1
