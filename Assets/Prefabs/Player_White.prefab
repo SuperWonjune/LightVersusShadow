@@ -55,8 +55,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.1
-  m_AngularDrag: 0.5
+  m_LinearDrag: 0.5
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -97,11 +97,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f49ff2301947b4a4c9526f6db34860c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   playerIndex: 2
   speed: 3
-  jumpPower: 0
+  jumpPower: 10
   shot: {fileID: 1582685357648176, guid: 84635417f4b28b349baa366f3a74daf3, type: 2}
   shotSpawn: {fileID: 0}
   fireRate: 0
