@@ -45,6 +45,14 @@ public class ObjectsGravityController : MonoBehaviour {
 
         foreach (ObjectsOnGravity objects in gravityObjectsList)
         {
+            // 땅에 붙은 물체라면 중력 무시
+
+            if (objects.checkIsOnGround())
+            {
+                continue;
+            }
+
+
             gotRB = objects.getRB();
 
             // 영역에 따라 중력의 방향만 설정
