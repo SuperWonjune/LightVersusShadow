@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectsGravityController : MonoBehaviour {
 
-    public float gravityModifier = 1f;
+    public float gravityModifier = 10f;
 
     // 위치한 장소를 설정하기 위한 변수
     const int WHITE = 0;
@@ -44,9 +44,6 @@ public class ObjectsGravityController : MonoBehaviour {
         }
 
 
-
-        
-
         foreach (ObjectsOnGravity objects in gravityObjectsList)
         {
             // 땅에 붙은 물체라면 중력 무시
@@ -56,19 +53,12 @@ public class ObjectsGravityController : MonoBehaviour {
                 continue;
             }
 
-
             gotRB = objects.getRB();
 
-            // 영역에 따라 중력의 방향만 설정
-
-            // 흰색의 영역에 물체가 존재할 경우
             if (objects.returnLocatedArea() == WHITE)
             {
                 // 왼족으로 중력 설정
-                objects.addToGravityVelocity(-gravityModifier * Physics2D.gravity * Time.deltaTime);
-                Vector2 deltaPosition = objects.getGravityVelocity() * Time.deltaTime;
-                Vector2 move = Vector2.left * deltaPosition.y;
-                gotRB.position = gotRB.position + move;
+                gotRB.AddForce(Vector2.left * Physics.gravity.magnitude);
             }
 
 
@@ -76,18 +66,8 @@ public class ObjectsGravityController : MonoBehaviour {
             else
             {
                 // 오른쪽으로 중력 설정
-                objects.addToGravityVelocity(gravityModifier * Physics2D.gravity * Time.deltaTime);
-                Vector2 deltaPosition = objects.getGravityVelocity() * Time.deltaTime;
-                Vector2 move = Vector2.left * deltaPosition.y;
-                gotRB.position = gotRB.position + move;
+                gotRB.AddForce(Vector2.right * Physics.gravity.magnitude);
             }
-
-            
-
-
         }
-
-
-        
     }
 }

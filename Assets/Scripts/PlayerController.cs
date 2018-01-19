@@ -39,8 +39,8 @@ public class PlayerController : ObjectsOnGravity {
 
     private void Move()
     {
-        Vector2 movement = new Vector2(0, horizontalMove);
-        rb2D.velocity =  movement * speed;
+        Vector2 movement = new Vector2(rb2D.velocity.x, horizontalMove * speed);
+        rb2D.velocity =  movement;
     }
 
     private void Jump()
@@ -50,7 +50,7 @@ public class PlayerController : ObjectsOnGravity {
             return;
         }
 
-        rb2D.AddForce(Vector2.right * jumpPower * Time.deltaTime, ForceMode2D.Impulse);
+        rb2D.AddForce(Vector2.left * jumpPower, ForceMode2D.Impulse);
         
 
     }
