@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ObjectsOnGravity : MonoBehaviour {
 
-    public ObjectsGravityController objectsGravityController;
+    protected ObjectsGravityController objectsGravityController;
 
     const int WHITE = 0;
     const int BLACK = 1;
@@ -15,17 +15,19 @@ public class ObjectsOnGravity : MonoBehaviour {
 
 
 
-    private bool isOnGround = false;
+    protected bool isOnGround = false;
     // Located Area
     // 0 -> white space
     // 1 -> black space
-    private int locatedArea = WHITE;
+    protected int locatedArea = WHITE;
 
 
-    private Vector2 gravityVelocity;
+    protected Vector2 gravityVelocity;
 
 
     virtual public void Start () {
+        // 컨트롤러 연결
+        objectsGravityController = GameObject.FindGameObjectWithTag("ObjectsGravityController").GetComponent<ObjectsGravityController>();
 
         rb2D = GetComponent<Rigidbody2D>();
 
@@ -35,6 +37,7 @@ public class ObjectsOnGravity : MonoBehaviour {
 
 	virtual public void Update () {
         checkWhichAreaIn();
+        SetGravityToZero();
 	}
 
     private void checkWhichAreaIn()
@@ -49,6 +52,14 @@ public class ObjectsOnGravity : MonoBehaviour {
             locatedArea = WHITE;
         }
 
+    }
+
+    private void SetGravityToZero()
+    {
+        if (isOnGround)
+        {
+            gravityVelocity = Vector2.zero;
+        }
     }
 
     public int returnLocatedArea()

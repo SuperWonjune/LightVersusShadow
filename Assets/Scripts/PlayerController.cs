@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : ObjectsOnGravity {
 
     public int playerIndex;
-    public int speed;
+    public float speed;
+    public float jumpPower;
 
     // 이동 관련
     Vector3 movement;
@@ -14,9 +15,6 @@ public class PlayerController : ObjectsOnGravity {
 
     public override void Start () {
         base.Start();
-
-        // 컴포넌트 등록
-        //rb2D = GetComponent<Rigidbody2D>();
     }
 	
 	// Update is called once per frame
@@ -42,11 +40,18 @@ public class PlayerController : ObjectsOnGravity {
     private void Move()
     {
         Vector2 movement = new Vector2(0, horizontalMove);
-        rb2D.velocity = movement * speed;
+        rb2D.velocity =  movement * speed;
     }
 
     private void Jump()
     {
+        if (!Input.GetKey(KeyCode.Space) || !isOnGround)
+        {
+            return;
+        }
+
+        rb2D.AddForce(Vector2.right * jumpPower * Time.deltaTime, ForceMode2D.Impulse);
+        
 
     }
 }
