@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class ObjectsGravityController : MonoBehaviour {
 
-    public float gravityModifier = 10f;
-
     // 위치한 장소를 설정하기 위한 변수
     const int WHITE = 0;
     const int BLACK = 1;
-
 
     // 게임 내 중력의 영향을 받는 물체들을 담는 리스트
     private List<ObjectsOnGravity> gravityObjectsList;
@@ -19,12 +16,27 @@ public class ObjectsGravityController : MonoBehaviour {
 	}
 
 	void Update () {
-
+        checkDead();
     }
 
     private void FixedUpdate()
     {
         setGravityToObjects();
+    }
+
+    private void checkDead()
+    {
+        // 배열을 순환하면서 소멸한 instance를 찾아서 제거
+
+        foreach (ObjectsOnGravity objects in gravityObjectsList)
+        {
+            if (!objects.checkIsAlive())
+            {
+                Destroy(objects.gameObject);
+                gravityObjectsList.Remove(objects);
+            }
+            
+        }
     }
 
     public void addObjects(ObjectsOnGravity objectsToPush)
