@@ -13,12 +13,18 @@ public class ObjectsOnGravity : MonoBehaviour {
 
     protected Rigidbody2D rb2D;
 
+
+
+    private bool isOnGround = false;
     // Located Area
     // 0 -> white space
     // 1 -> black space
     private int locatedArea = WHITE;
 
-    
+
+    private Vector2 gravityVelocity;
+
+
     virtual public void Start () {
 
         rb2D = GetComponent<Rigidbody2D>();
@@ -54,4 +60,30 @@ public class ObjectsOnGravity : MonoBehaviour {
     {
         return rb2D;
     }
+
+    public void setTrueOnGround()
+    {
+        isOnGround = true;
+    }
+
+    public void setFalseOnGround()
+    {
+        isOnGround = false;
+    }
+
+    public bool checkIsOnGround()
+    {
+        return isOnGround;
+    }
+
+    public void addToGravityVelocity(Vector2 addVector2)
+    {
+        gravityVelocity += addVector2;
+    }
+
+    public Vector2 getGravityVelocity()
+    {
+        return gravityVelocity;
+    }
+
 }
