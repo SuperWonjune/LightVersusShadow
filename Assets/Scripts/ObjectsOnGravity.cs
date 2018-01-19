@@ -18,7 +18,7 @@ public class ObjectsOnGravity : MonoBehaviour {
     // 0 -> white space
     // 1 -> black space
     private int locatedArea = WHITE;
-    private Vector2 gravityVelocity;
+    private bool isAlive = true;
     
     virtual public void Start () {
         // 컨트롤러 연결
@@ -32,7 +32,6 @@ public class ObjectsOnGravity : MonoBehaviour {
 
 	virtual public void Update () {
         checkWhichAreaIn();
-        SetGravityToZero();
 	}
 
     private void checkWhichAreaIn()
@@ -47,14 +46,6 @@ public class ObjectsOnGravity : MonoBehaviour {
             locatedArea = WHITE;
         }
 
-    }
-
-    private void SetGravityToZero()
-    {
-        if (isOnGround)
-        {
-            gravityVelocity = Vector2.zero;
-        }
     }
 
     public int returnLocatedArea()
@@ -82,14 +73,9 @@ public class ObjectsOnGravity : MonoBehaviour {
         return isOnGround;
     }
 
-    public void addToGravityVelocity(Vector2 addVector2)
+    public bool checkIsAlive()
     {
-        gravityVelocity += addVector2;
-    }
-
-    public Vector2 getGravityVelocity()
-    {
-        return gravityVelocity;
+        return isAlive;
     }
 
 }
