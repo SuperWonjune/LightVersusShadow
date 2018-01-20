@@ -15,12 +15,14 @@ public class ObjectsGravityController : MonoBehaviour {
         gravityObjectsList = new List<ObjectsOnGravity>();
 	}
 
-	void Update () {
+	void Update ()
+    {
         checkDead();
     }
 
     private void FixedUpdate()
     {
+        
         setGravityToObjects();
     }
 
@@ -28,14 +30,13 @@ public class ObjectsGravityController : MonoBehaviour {
     {
         // 배열을 순환하면서 소멸한 instance를 찾아서 제거
 
-        foreach (ObjectsOnGravity objects in gravityObjectsList)
+        foreach (ObjectsOnGravity objects in gravityObjectsList.ToArray())
         {
             if (!objects.checkIsAlive())
             {
                 Destroy(objects.gameObject);
                 gravityObjectsList.Remove(objects);
-            }
-            
+            }            
         }
     }
 
