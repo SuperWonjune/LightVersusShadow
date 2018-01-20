@@ -54,7 +54,6 @@ public class PlatformController : MonoBehaviour {
         Quaternion createRotation = Quaternion.identity;
         float randomX = Random.Range(3.0f, 6.0f);
         
-
         switch (direction)
         {
             case LEFT:
