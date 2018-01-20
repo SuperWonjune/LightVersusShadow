@@ -98,13 +98,7 @@ public class PlayerController : ObjectsOnGravity {
                 // BLACK SHOOT
                 else if (GameSizeDefiner.blackMoveXBoundary <= touchXPos && touchXPos < GameSizeDefiner.blackShootXBoundary)
                 {
-                    if ((Input.GetButton("Fire" + playerIndex)) && (Time.time > nextFire))
-                    {
-                        nextFire = Time.time + fireRate;
-
-                        BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
-                        bullet.initialize(shotSpawn.position.x, shotSpawn.position.y, touchXPos, touchYPos);
-                    }                   
+                    Shoot(touchXPos, touchYPos);                 
                 }
 
 
@@ -142,15 +136,29 @@ public class PlayerController : ObjectsOnGravity {
                 // WHITE SHOOT
                 else if (GameSizeDefiner.whiteShootXBoundary < touchXPos && touchXPos <= GameSizeDefiner.whiteMoveXBoundary)
                 {
-                    if ((Input.GetButton("Fire" + playerIndex)) && (Time.time > nextFire))
-                    {
-                        nextFire = Time.time + fireRate;
-
-                        BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
-                        bullet.initialize(shotSpawn.position.x, shotSpawn.position.y, touchXPos, touchYPos);
-                    }
+                    Shoot(touchXPos, touchYPos);
                 }
             }
+        }
+    }
+
+    private void Shoot(float touchXPos, float touchYPos)
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+
+            Vector3 playerPosition = transform.position;
+            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchXPos, touchYPos, 0.0f));
+            float angle = Mathf.Atan2(playerPosition.x - touchPosition.x, -touchPosition.y - playerPosition.y);
+
+            Vector3 spawnPosition = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0.0f);
+            Quaternion quaternion = Quaternion.identity;
+
+            //shotSpawn.localPosition = 0.5f * spawnPosition;   
+
+            BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
+            bullet.initialize(transform.position.x, transform.position.y, touchXPos, touchYPos);
         }
     }
 
