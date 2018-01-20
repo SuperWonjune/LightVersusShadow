@@ -6,6 +6,13 @@ public class DestroyByBoundary : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<ObjectsOnGravity>().setDead();
+        ObjectsOnGravity objects;
+
+        objects = collision.gameObject.GetComponent<ObjectsOnGravity>();
+        if (objects.CompareTag("Bullet"))
+        {
+            objects.setDead();
+        }
+        
     }
 }

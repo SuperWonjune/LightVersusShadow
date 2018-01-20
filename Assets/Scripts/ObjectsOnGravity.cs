@@ -8,8 +8,8 @@ public class ObjectsOnGravity : MonoBehaviour {
 
     protected ObjectsGravityController objectsGravityController;
 
-    const int WHITE = 0;
-    const int BLACK = 1;
+    protected const int WHITE = 0;
+    protected const int BLACK = 1;
 
     protected Rigidbody2D rb2D;
 
@@ -17,7 +17,7 @@ public class ObjectsOnGravity : MonoBehaviour {
     // Located Area
     // 0 -> white space
     // 1 -> black space
-    private int locatedArea = WHITE;
+    protected int locatedArea = WHITE;
     protected bool isAlive = true;
     
     virtual public void Start () {
@@ -32,7 +32,7 @@ public class ObjectsOnGravity : MonoBehaviour {
         checkWhichAreaIn();
 	}
 
-    private void checkWhichAreaIn()
+    protected void checkWhichAreaIn()
     {
         // object의 위치를 검사, 어느 영역에 있는지 설정
         if (gameObject.transform.position.x > 0)
