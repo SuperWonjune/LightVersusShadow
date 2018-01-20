@@ -32,7 +32,7 @@ public class ObjectsOnGravity : MonoBehaviour {
         checkWhichAreaIn();
 	}
 
-    private void checkWhichAreaIn()
+    protected void checkWhichAreaIn()
     {
         // object의 위치를 검사, 어느 영역에 있는지 설정
         if (gameObject.transform.position.x > 0)
