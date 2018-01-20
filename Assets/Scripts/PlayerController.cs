@@ -98,8 +98,13 @@ public class PlayerController : ObjectsOnGravity {
                 // BLACK SHOOT
                 else if (GameSizeDefiner.blackMoveXBoundary <= touchXPos && touchXPos < GameSizeDefiner.blackShootXBoundary)
                 {
-                    BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
-                    bullet.initialize(shotSpawn.position.x, shotSpawn.position.y, touchXPos, touchYPos);
+                    if ((Input.GetButton("Fire" + playerIndex)) && (Time.time > nextFire))
+                    {
+                        nextFire = Time.time + fireRate;
+
+                        BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
+                        bullet.initialize(shotSpawn.position.x, shotSpawn.position.y, touchXPos, touchYPos);
+                    }                   
                 }
 
 
@@ -137,20 +142,15 @@ public class PlayerController : ObjectsOnGravity {
                 // WHITE SHOOT
                 else if (GameSizeDefiner.whiteShootXBoundary < touchXPos && touchXPos <= GameSizeDefiner.whiteMoveXBoundary)
                 {
-                    BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
-                    bullet.initialize(shotSpawn.position.x, shotSpawn.position.y, touchXPos, touchYPos);
+                    if ((Input.GetButton("Fire" + playerIndex)) && (Time.time > nextFire))
+                    {
+                        nextFire = Time.time + fireRate;
+
+                        BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
+                        bullet.initialize(shotSpawn.position.x, shotSpawn.position.y, touchXPos, touchYPos);
+                    }
                 }
             }
-        }
-    }
-
-    private void setShoot()
-    {
-        if ((Input.GetButton("Fire" + playerIndex)) && (Time.time > nextFire))
-        {
-            nextFire = Time.time + fireRate;
-            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-
         }
     }
 
