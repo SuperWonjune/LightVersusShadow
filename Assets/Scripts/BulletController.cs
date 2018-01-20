@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMover : ObjectsOnGravity {
+public class BulletController : ObjectsOnGravity
+{
     public int speed;
 
-	// Use this for initialization
-	public override void Start () {
+    // Use this for initialization
+    public override void Start()
+    {
         base.Start();
-	}
+        rb2D.velocity = Vector2.left * speed;
+    }
 
     public override void Update()
     {
@@ -17,8 +20,6 @@ public class BulletMover : ObjectsOnGravity {
 
     private void FixedUpdate()
     {
-        rb2D = GetComponent<Rigidbody2D>();
- 
-        rb2D.velocity = Vector2.left * speed;
+
     }
 }

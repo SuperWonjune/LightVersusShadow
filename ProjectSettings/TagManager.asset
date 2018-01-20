@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fly
   - ObjectsGravityController
+  - bullet
   layers:
   - Default
   - TransparentFX

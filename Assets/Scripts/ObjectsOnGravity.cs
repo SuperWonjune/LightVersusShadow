@@ -18,14 +18,12 @@ public class ObjectsOnGravity : MonoBehaviour {
     // 0 -> white space
     // 1 -> black space
     private int locatedArea = WHITE;
-    private bool isAlive = true;
+    protected bool isAlive = true;
     
     virtual public void Start () {
         // 컨트롤러 연결
         objectsGravityController = GameObject.FindGameObjectWithTag("ObjectsGravityController").GetComponent<ObjectsGravityController>();
-
         rb2D = GetComponent<Rigidbody2D>();
-
         objectsGravityController.addObjects(this);
 	}
 	
@@ -76,6 +74,11 @@ public class ObjectsOnGravity : MonoBehaviour {
     public bool checkIsAlive()
     {
         return isAlive;
+    }
+
+    public void setDead()
+    {
+        isAlive = false;
     }
 
 }

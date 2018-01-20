@@ -21,11 +21,11 @@ GameObject:
   - component: {fileID: 4612974332785476}
   - component: {fileID: 212862725711197700}
   - component: {fileID: 50952198739581362}
-  - component: {fileID: 114275271006889676}
   - component: {fileID: 58095884157146136}
+  - component: {fileID: 114564632924868308}
   m_Layer: 0
   m_Name: White Bullet
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
---- !u!114 &114275271006889676
+--- !u!114 &114564632924868308
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -86,10 +86,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1582685357648176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b34909fa0cbb4a4b99d3f0b8e58d029, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e5a3f79cb590174ab3724775fb6ec9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsGravityController: {fileID: 0}
   speed: 5
 --- !u!212 &212862725711197700
 SpriteRenderer:
