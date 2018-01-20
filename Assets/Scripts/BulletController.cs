@@ -6,6 +6,11 @@ public class BulletController : ObjectsOnGravity
 {
     public int speed;
 
+    private float createdX;
+    private float createdY;
+    private float aimedX;
+    private float aimedY;
+
     // Use this for initialization
     public override void Start()
     {
@@ -21,5 +26,13 @@ public class BulletController : ObjectsOnGravity
     private void FixedUpdate()
     {
 
+    }
+
+    public void initialize(float createdX_input, float createdY_input, float aimedX_input, float aimedY_input)
+    {
+        createdX = createdX_input;
+        createdY = createdY_input;
+        aimedX = aimedX_input;
+        aimedY = aimedY_input;
     }
 }
