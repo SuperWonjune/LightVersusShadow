@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : ObjectsOnGravity {
-
     public int playerIndex;
     public float speed;
     public float jumpPower;
@@ -13,6 +13,8 @@ public class PlayerController : ObjectsOnGravity {
     public float fireRate;
 
     private float nextFire = 0.0F;
+
+    private bool isJumping = false;
 
     // 이동 관련
     Vector3 movement;
@@ -40,6 +42,7 @@ public class PlayerController : ObjectsOnGravity {
     {
         horizontalMove = 0;
         verticalMove = 0;
+        isJumping = false;
         //horizontalMove = Input.GetAxisRaw("Horizontal" + playerIndex);
         //verticalMove = Input.GetAxisRaw("Vertical" + playerIndex);
         
@@ -53,13 +56,14 @@ public class PlayerController : ObjectsOnGravity {
             return;
         }
 
-        //Touch myTouch = Input.GetTouch(0);
+        
         Touch[] myTouches = Input.touches;
 
         for (int i= 0; i< Input.touchCount; i++)
         {
-            float touchXPos = myTouches[i].position.x;
-            float touchYPos = myTouches[i].position.y;
+            Touch myTouch = myTouches[i];
+            float touchXPos = myTouch.position.x;
+            float touchYPos = myTouch.position.y;
 
 
             // BLACK STEER
@@ -67,9 +71,9 @@ public class PlayerController : ObjectsOnGravity {
             {
 
                 // BLACK MOVE
-                if (touchXPos < 120)
+                if (touchXPos < GameSizeDefiner.blackMoveXBoundary)
                 {
-                    if (touchYPos > 450)
+                    if (touchYPos > GameSizeDefiner.blackMoveYBoundary)
                     {
                         horizontalMove = 1;
                     }
@@ -78,10 +82,21 @@ public class PlayerController : ObjectsOnGravity {
                     {
                         horizontalMove = -1;
                     }
+
+                    // BLACK JUMP
+                    if (myTouch.phase == TouchPhase.Began)
+                    {
+                        if (myTouch.tapCount == 2)
+                        {
+                            isJumping = true;
+                        }
+                    }
+
+
                 }
 
                 // BLACK SHOOT
-                else if (120 <= touchXPos && touchXPos < 502)
+                else if (GameSizeDefiner.blackMoveXBoundary <= touchXPos && touchXPos < GameSizeDefiner.blackShootXBoundary)
                 {
                     BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
                     bullet.initialize(shotSpawn.position.x, shotSpawn.position.y, touchXPos, touchYPos);
@@ -96,9 +111,9 @@ public class PlayerController : ObjectsOnGravity {
             {
 
                 // WHITE MOVE
-                if (touchXPos > 1080)
-                {
-                    if (touchYPos > 450)
+                if (touchXPos > GameSizeDefiner.whiteMoveXBoundary)
+                {   
+                    if (touchYPos > GameSizeDefiner.whiteMoveYBoundary)
                     {
                         horizontalMove = 1;
                     }
@@ -107,11 +122,20 @@ public class PlayerController : ObjectsOnGravity {
                         horizontalMove = -1;
                     }
 
+                    // WHITE JUMP
+                    if (myTouch.phase == TouchPhase.Began)
+                    {
+                        if (myTouch.tapCount == 2)
+                        {
+                            isJumping = true;
+                        }
+                    }
+
 
                 }
 
                 // WHITE SHOOT
-                else if (702 < touchXPos && touchXPos <= 1080)
+                else if (GameSizeDefiner.whiteShootXBoundary < touchXPos && touchXPos <= GameSizeDefiner.whiteMoveXBoundary)
                 {
                     BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
                     bullet.initialize(shotSpawn.position.x, shotSpawn.position.y, touchXPos, touchYPos);
@@ -142,7 +166,7 @@ public class PlayerController : ObjectsOnGravity {
     {
         int jumpDriection = 1;
 
-        if (!Input.GetKey(KeyCode.Space) || !isOnGround)
+        if (!isJumping || !isOnGround)
         {
             return;
         }
