@@ -11,6 +11,8 @@ public class BulletController : ObjectsOnGravity
     public GameObject whiteBulletDestroyParticle;
     public GameObject blackBulletTrail;
     public GameObject whiteBulletTrail;
+    public GameObject blackPlatformDestroyParticle;
+    public GameObject whitePlatformDestoryParticle;
     
 
     private SpriteRenderer spriteRenderer;
@@ -64,7 +66,15 @@ public class BulletController : ObjectsOnGravity
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
+            GameObject destroyParticle;
+
+            if (returnLocatedArea() == BLACK)
+                destroyParticle = whitePlatformDestoryParticle;
+            else
+                destroyParticle = blackPlatformDestroyParticle;
+
             platformController.removePlatform(collision.gameObject);
+            Instantiate(destroyParticle, transform.position, transform.rotation);
             setDead();
         }
     }
