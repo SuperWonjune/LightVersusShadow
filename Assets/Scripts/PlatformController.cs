@@ -36,7 +36,7 @@ public class PlatformController : MonoBehaviour {
 
             else if (platformUpdateFlag == 2)
             {
-                if (objects.transform.localScale.y < 0)
+                if (objects.transform.localScale.y < 0.2f)
                     removePlatforms();
                 objects.transform.localScale -= new Vector3(0.0f, 0.1f, 0.0f);
             }
