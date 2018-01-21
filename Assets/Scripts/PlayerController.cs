@@ -166,7 +166,7 @@ public class PlayerController : ObjectsOnGravity {
             nextFire = Time.time + fireRate;
 
             BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
-            bullet.initialize(playerIndex, touchXPos, touchYPos);
+            bullet.initialize(playerIndex, transform.position.y, touchXPos, touchYPos);
         }
     }
 
