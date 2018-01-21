@@ -100,6 +100,10 @@ MonoBehaviour:
     type: 2}
   whiteBulletTrail: {fileID: 1796134296726672, guid: ac78ed61eb45ff2459ac39c41a37472c,
     type: 2}
+  blackPlatformDestroyParticle: {fileID: 1796134296726672, guid: 1dda72c1813b5c54c9ca6de689675749,
+    type: 2}
+  whitePlatformDestoryParticle: {fileID: 1796134296726672, guid: 536ba8b4b732fc34c9cf58c2f5ebba6d,
+    type: 2}
 --- !u!212 &212862725711197700
 SpriteRenderer:
   m_ObjectHideFlags: 1
