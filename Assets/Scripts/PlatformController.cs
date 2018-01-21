@@ -29,10 +29,10 @@ public class PlatformController : MonoBehaviour {
         while (true)
         {
             createPlatforms();
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
 
             removePlatforms();
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
         }
         
     }
@@ -54,13 +54,23 @@ public class PlatformController : MonoBehaviour {
         float randomX;
         int platformCount = platformList.Count;
 
-        if (platformCount == 0) { randomX = Random.Range(2.8f, 4.2f); }
+        if (platformCount == 0) { randomX = Random.Range(2.0f, 5.5f); }
         else {
             float select = Random.value;
-            if (select < 0.5)
-                randomX = platformList[platformCount-1].transform.position.x + 1.0f;
-            else
-                randomX = platformList[platformCount-1].transform.position.x - 1.0f;
+            float prevHeight = platformList[platformCount - 1].transform.position.x;
+
+            if (select < 0.5) {
+                if (prevHeight + 1.5f < 6.0f)
+                    randomX = prevHeight + 1.5f;
+                else
+                    randomX = prevHeight - 1.5f;
+            }
+            else {
+                if (prevHeight - 1.5f > 2.5f)
+                    randomX = prevHeight - 1.5f;
+                else
+                    randomX = prevHeight + 1.5f;
+            }
         }
         
         switch (direction)
