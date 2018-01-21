@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyByBoundary : MonoBehaviour {
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         ObjectsOnGravity objects;
 
@@ -13,6 +13,5 @@ public class DestroyByBoundary : MonoBehaviour {
         {
             objects.setDead();
         }
-        
     }
 }
