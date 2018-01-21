@@ -103,8 +103,7 @@ public class PlayerController : ObjectsOnGravity {
 
                 // BLACK SHOOT
                 else if (GameSizeDefiner.blackMoveXBoundary <= touchXPos && touchXPos < GameSizeDefiner.blackShootXBoundary)
-                {
-                        nextFire = Time.time + fireRate;
+                {                      
                     Shoot(touchXPos, touchYPos);                 
                 }
 
