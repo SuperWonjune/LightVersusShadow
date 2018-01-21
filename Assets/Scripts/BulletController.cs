@@ -78,4 +78,7 @@ public class BulletController : ObjectsOnGravity
         rb2D.velocity = speed * (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
 
     }
+
+
+    private void
 }

@@ -35,6 +35,7 @@ public class PlayerController : ObjectsOnGravity {
     {
         Move();
         Jump();
+        CheckOutOfMap();
     }
 
     
@@ -62,6 +63,11 @@ public class PlayerController : ObjectsOnGravity {
         
         Touch[] myTouches = Input.touches;
 
+        bool blackYUpPressed = false;
+        bool blackYDownPressed = false;
+        bool whiteYUpPressed = false;
+        bool whiteYDownPressed = false;
+
         for (int i= 0; i< Input.touchCount; i++)
         {
             Touch myTouch = myTouches[i];
@@ -79,28 +85,26 @@ public class PlayerController : ObjectsOnGravity {
                     if (touchYPos > GameSizeDefiner.blackMoveYBoundary)
                     {
                         horizontalMove = 1;
+                        blackYUpPressed = true;
                     }
 
                     else
                     {
                         horizontalMove = -1;
+                        blackYDownPressed = true;
                     }
 
                     // BLACK JUMP
-                    if (myTouch.phase == TouchPhase.Began)
-                    {
-                        if (myTouch.tapCount == 2)
-                        {
-                            isJumping = true;
-                        }
+                    if (blackYUpPressed && blackYDownPressed) { 
+                        isJumping = true;
                     }
-
 
                 }
 
                 // BLACK SHOOT
                 else if (GameSizeDefiner.blackMoveXBoundary <= touchXPos && touchXPos < GameSizeDefiner.blackShootXBoundary)
                 {
+                        nextFire = Time.time + fireRate;
                     Shoot(touchXPos, touchYPos);                 
                 }
 
@@ -118,19 +122,18 @@ public class PlayerController : ObjectsOnGravity {
                     if (touchYPos > GameSizeDefiner.whiteMoveYBoundary)
                     {
                         horizontalMove = 1;
+                        whiteYUpPressed = true;
                     }
                     else
                     {
                         horizontalMove = -1;
+                        whiteYDownPressed = true;
                     }
 
                     // WHITE JUMP
-                    if (myTouch.phase == TouchPhase.Began)
+                    if (whiteYUpPressed && whiteYDownPressed)
                     {
-                        if (myTouch.tapCount == 2)
-                        {
-                            isJumping = true;
-                        }
+                        isJumping = true;
                     }
 
 
@@ -193,6 +196,19 @@ public class PlayerController : ObjectsOnGravity {
         rb2D.AddForce(Vector2.left * jumpPower * jumpDriection, ForceMode2D.Impulse);
         
 
+    }
+
+    private void CheckOutOfMap()
+    {
+        if (gameObject.transform.position.y < -5)
+        {
+            gameObject.transform.position = new Vector2(transform.position.x, 5);
+        }
+
+        else if (gameObject.transform.position.y > 5)
+        {
+            gameObject.transform.position = new Vector2(transform.position.x, -5);
+        }
     }
 
     
