@@ -15,8 +15,8 @@ public class GameSizeDefiner : MonoBehaviour {
     public static int whiteMoveYBoundary = screenHeight / 2;
 
     // 발사 input 경계선
-    public static int blackShootXBoundary = (screenWidth / 2) - (screenWidth / 25);
-    public static int whiteShootXBoundary = (screenWidth / 2) + (screenWidth / 25);
+    public static int blackShootXBoundary = (screenWidth / 2) - (screenWidth / 30);
+    public static int whiteShootXBoundary = (screenWidth / 2) + (screenWidth / 30);
 
 
 

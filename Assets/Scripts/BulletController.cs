@@ -7,6 +7,8 @@ public class BulletController : ObjectsOnGravity
     public int speed;
     public Sprite blackBullet;
     public Sprite whiteBullet;
+    public GameObject blackBulletDestroyParticle;
+    public GameObject whiteBulletDestroyParticle;
 
     private SpriteRenderer spriteRenderer;
     private PlatformController platformController;
@@ -77,5 +79,21 @@ public class BulletController : ObjectsOnGravity
 
         rb2D.velocity = speed * (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
 
+    }
+
+    private void OnDestroy()
+    {
+        // 파괴 particle 생성
+        GameObject destroyParticle;
+        if (returnLocatedArea() == BLACK)
+        {
+            destroyParticle = whiteBulletDestroyParticle;
+        }
+        else
+        {
+            destroyParticle = blackBulletDestroyParticle;
+        }
+
+        Instantiate(destroyParticle, transform.position, Quaternion.identity);
     }
 }
