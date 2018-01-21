@@ -29,10 +29,10 @@ public class PlatformController : MonoBehaviour {
         while (true)
         {
             createPlatforms();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(5);
 
             removePlatforms();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
         }
         
     }

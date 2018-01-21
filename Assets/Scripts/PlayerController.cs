@@ -15,6 +15,7 @@ public class PlayerController : ObjectsOnGravity {
     private float nextFire = 0.0F;
 
     private bool isJumping = false;
+    private Animator animator;
 
     // 이동 관련
     Vector3 movement;
@@ -23,6 +24,7 @@ public class PlayerController : ObjectsOnGravity {
 
     public override void Start () {
         base.Start();
+        animator = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -55,10 +57,17 @@ public class PlayerController : ObjectsOnGravity {
 
         if (Input.touchCount < 1)
         {
+            animator.SetBool("isWalk", false);
             return;
         }
 
-       
+       if (isOnGround)
+        {
+            animator.SetBool("isJump", false);
+        } else
+        {
+            animator.SetBool("isJump", true);
+        }
 
         
         Touch[] myTouches = Input.touches;
@@ -82,6 +91,8 @@ public class PlayerController : ObjectsOnGravity {
                 // BLACK MOVE
                 if (touchXPos < GameSizeDefiner.blackMoveXBoundary)
                 {
+                    animator.SetBool("isWalk", true);
+
                     if (touchYPos > GameSizeDefiner.blackMoveYBoundary)
                     {
                         horizontalMove = 1;
@@ -97,6 +108,7 @@ public class PlayerController : ObjectsOnGravity {
                     // BLACK JUMP
                     if (blackYUpPressed && blackYDownPressed) { 
                         isJumping = true;
+                        animator.SetBool("isJump", true);
                     }
 
                 }
