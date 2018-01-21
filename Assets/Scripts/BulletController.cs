@@ -65,10 +65,11 @@ public class BulletController : ObjectsOnGravity
 
     // Player Controller로부터 터치 정보와 Player의 위치를 받아온 후,
     // 그 정보를 통해 각도를 계산하여 탄환의 방향을 설정.
-    public void initialize(float createdX_input, float createdY_input, float aimedX_input, float aimedY_input)
+    public void initialize(int playerIndex, float aimedX_input, float aimedY_input)
     {
-        createdX = createdX_input;
-        createdY = createdY_input;
+        if (playerIndex == 1) { createdX = -5.6f; createdY = 0.0f; }
+        if (playerIndex == 2) { createdX = 5.6f; createdY = 0.0f; }            
+
         aimedX = aimedX_input;
         aimedY = aimedY_input;
 

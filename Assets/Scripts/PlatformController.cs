@@ -7,6 +7,7 @@ public class PlatformController : MonoBehaviour {
     public GameObject blackPlatform;
 
     private List<GameObject> platformList;
+    private int platformUpdateFlag;
     private const int LEFT = 0;
     private const int MIDDLE_LEFT = 1;    
     private const int CENTER = 2;
@@ -17,21 +18,41 @@ public class PlatformController : MonoBehaviour {
     void Start () {
         platformList = new List<GameObject>();
         StartCoroutine(generatePlatforms());
+        platformUpdateFlag = 1;
     }
 	
 	// Update is called once per frame
 	void Update () {
+
         
+        foreach (GameObject objects in platformList.ToArray())
+        {   
+            if (platformUpdateFlag == 1)
+            {
+                if (objects.transform.localScale.y > 2.0f)
+                    break;
+                objects.transform.localScale += new Vector3(0.0f, 0.1f, 0.0f);
+            }
+
+            else if (platformUpdateFlag == 2)
+            {
+                if (objects.transform.localScale.y < 0)
+                    removePlatforms();
+                objects.transform.localScale -= new Vector3(0.0f, 0.1f, 0.0f);
+            }
+            
+        }
 	}
 
     IEnumerator generatePlatforms()
     {
         while (true)
         {
+            platformUpdateFlag = 1;
             createPlatforms();
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(4);
 
-            removePlatforms();
+            platformUpdateFlag = 2;
             yield return new WaitForSeconds(2);
         }
         
