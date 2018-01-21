@@ -165,17 +165,8 @@ public class PlayerController : ObjectsOnGravity {
         {
             nextFire = Time.time + fireRate;
 
-            Vector3 playerPosition = transform.position;
-            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchXPos, touchYPos, 0.0f));
-            float angle = Mathf.Atan2(playerPosition.x - touchPosition.x, -touchPosition.y - playerPosition.y);
-
-            Vector3 spawnPosition = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0.0f);
-            Quaternion quaternion = Quaternion.identity;
-
-            //shotSpawn.localPosition = 0.5f * spawnPosition;   
-
             BulletController bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation).GetComponent<BulletController>();
-            bullet.initialize(transform.position.x, transform.position.y, touchXPos, touchYPos);
+            bullet.initialize(playerIndex, touchXPos, touchYPos);
         }
     }
 
