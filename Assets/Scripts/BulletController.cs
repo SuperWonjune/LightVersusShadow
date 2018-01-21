@@ -9,6 +9,9 @@ public class BulletController : ObjectsOnGravity
     public Sprite whiteBullet;
     public GameObject blackBulletDestroyParticle;
     public GameObject whiteBulletDestroyParticle;
+    public GameObject blackBulletTrail;
+    public GameObject whiteBulletTrail;
+    
 
     private SpriteRenderer spriteRenderer;
     private PlatformController platformController;
@@ -29,6 +32,9 @@ public class BulletController : ObjectsOnGravity
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
         platformController = GameObject.FindGameObjectWithTag("Platform Controller").GetComponent<PlatformController>();
+
+        // 총알 trail 생성
+        InvokeRepeating("CreateTrail", 0.2f, 0.2f);
     }
 
     public override void Update()
@@ -68,7 +74,7 @@ public class BulletController : ObjectsOnGravity
     public void initialize(int playerIndex, float aimedX_input, float aimedY_input)
     {
         if (playerIndex == 1) { createdX = -5.6f; createdY = 0.0f; }
-        if (playerIndex == 2) { createdX = 5.6f; createdY = 0.0f; }            
+        if (playerIndex == 2) { createdX = 5.6f; createdY = 0.0f; }
 
         aimedX = aimedX_input;
         aimedY = aimedY_input;
@@ -79,7 +85,23 @@ public class BulletController : ObjectsOnGravity
         float angle = Mathf.Atan2(touchPosition.y - spawnPosition.y, touchPosition.x - spawnPosition.x);
 
         rb2D.velocity = speed * (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+    }
 
+    private void CreateTrail()
+    {
+        // trail particle 생성
+        GameObject trailParticle;
+
+        if (returnLocatedArea() == BLACK)
+        {
+            trailParticle = whiteBulletTrail;
+        }
+        else
+        {
+            trailParticle = blackBulletTrail;
+        }
+
+        Instantiate(trailParticle, transform.position, Quaternion.identity);
     }
 
     private void OnDestroy()
