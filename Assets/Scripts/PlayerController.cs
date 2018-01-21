@@ -45,16 +45,19 @@ public class PlayerController : ObjectsOnGravity {
         isJumping = false;
         //horizontalMove = Input.GetAxisRaw("Horizontal" + playerIndex);
         //verticalMove = Input.GetAxisRaw("Vertical" + playerIndex);
-        
+
 
         // Touch Movement
         // player_index = 1 -> BLACK
         // playeR_index = 2 -> WHITE
 
+
         if (Input.touchCount < 1)
         {
             return;
         }
+
+       
 
         
         Touch[] myTouches = Input.touches;

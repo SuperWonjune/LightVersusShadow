@@ -360,7 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 1
   speed: 3
-  jumpPower: 7.5
+  jumpPower: 8
   shot: {fileID: 1016311228041848, guid: 3ad44c29ff4fec24385295c9069050e5, type: 2}
   shotSpawn: {fileID: 1431570696}
   fireRate: 0.25
@@ -419,7 +419,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 544157121}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.334, y: 0.013, z: 0}
+  m_LocalPosition: {x: -8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1431570696}
@@ -505,7 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 2
   speed: 3
-  jumpPower: 7.5
+  jumpPower: 8
   shot: {fileID: 1582685357648176, guid: 84635417f4b28b349baa366f3a74daf3, type: 2}
   shotSpawn: {fileID: 86046217}
   fireRate: 0.25
@@ -564,7 +564,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 689038561}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.3, y: 0, z: 0}
+  m_LocalPosition: {x: 8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 86046217}
@@ -881,7 +881,7 @@ Transform:
   m_GameObject: {fileID: 1379538028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 689038566}
   - {fileID: 544157126}

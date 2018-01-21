@@ -42,7 +42,6 @@ public class PlatformController : MonoBehaviour {
     {
         createPlatformByDirection(LEFT);
         createPlatformByDirection(MIDDLE_LEFT);
-        createPlatformByDirection(CENTER);
         createPlatformByDirection(MIDDLE_RIGHT);
         createPlatformByDirection(RIGHT);
     }
@@ -52,32 +51,42 @@ public class PlatformController : MonoBehaviour {
     {
         Vector2 createPosition = new Vector2(0, 0);
         Quaternion createRotation = Quaternion.identity;
-        float randomX = Random.Range(3.0f, 6.0f);
+        float randomX;
+        int platformCount = platformList.Count;
+
+        if (platformCount == 0) { randomX = Random.Range(2.8f, 4.2f); }
+        else {
+            float select = Random.value;
+            if (select < 0.5)
+                randomX = platformList[platformCount-1].transform.position.x + 1.0f;
+            else
+                randomX = platformList[platformCount-1].transform.position.x - 1.0f;
+        }
         
         switch (direction)
         {
             case LEFT:
-                createPosition = new Vector2(randomX, -4);
+                createPosition = new Vector2(randomX, -3.5f);
                 break;
             case MIDDLE_LEFT:
-                createPosition = new Vector2(randomX, -2);
+                createPosition = new Vector2(randomX, -1.2f);
                 break;
             case CENTER:
                 createPosition = new Vector2(randomX, 0);
                 break;
             case MIDDLE_RIGHT:
-                createPosition = new Vector2(randomX, 2);
+                createPosition = new Vector2(randomX, 1.2f);
                 break;
             case RIGHT:
-                createPosition = new Vector2(randomX, 4);
+                createPosition = new Vector2(randomX, 3.5f);
                 break;
         }
 
         GameObject whitePF = Instantiate(whitePlatform, createPosition, createRotation);
         GameObject blackPF = Instantiate(blackPlatform, -createPosition, createRotation);
 
-        platformList.Add(whitePF);
-        platformList.Add(blackPF);        
+        platformList.Add(blackPF);
+        platformList.Add(whitePF);        
     }
 
     // 모든 오브젝트를 파괴한 후 리스트 비우기.

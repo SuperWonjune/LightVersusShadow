@@ -73,8 +73,9 @@ public class BulletController : ObjectsOnGravity
         Vector3 spawnPosition = new Vector3(createdX, createdY, 0.0f);
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(aimedX, aimedY, 0.0f));
 
-        float angle = Mathf.Atan2(spawnPosition.x - touchPosition.x, - touchPosition.y - spawnPosition.y);
-        rb2D.velocity = speed * (new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)));
+        float angle = Mathf.Atan2(touchPosition.y - spawnPosition.y, touchPosition.x - spawnPosition.x);
+
+        rb2D.velocity = speed * (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
 
     }
 }

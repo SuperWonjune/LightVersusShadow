@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5a3f79cb590174ab3724775fb6ec9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -8
+  speed: 8
   blackBullet: {fileID: 21300000, guid: 2ef9e2f1fc2c41143ad10dfacc759044, type: 3}
   whiteBullet: {fileID: 21300000, guid: cc685029e34241e41b6cb1ae0215c380, type: 3}
 --- !u!212 &212862725711197700
