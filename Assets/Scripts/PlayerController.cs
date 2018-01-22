@@ -31,6 +31,11 @@ public class PlayerController : ObjectsOnGravity {
     private bool isJumping = false;
     private Animator animator;
     private SpriteRenderer lifeSprite;
+
+    // 피격 관련
+    private bool isInvincible = false;
+    private float flashIntervalSec = 0.2f;
+    private float invincibleTime = 1f;
     
 
     // 이동 관련
@@ -232,7 +237,16 @@ public class PlayerController : ObjectsOnGravity {
     // 피격 시 라이프를 감소시킨 후 그에 따른 life sprite 변경.
     public void DestroyLife()
     {
+        // 무적인 상황일시 무시
+        if (isInvincible)
+        {
+            return;
+        }
+
+
         lifeCount -= 1;
+        tempInvincible(invincibleTime);
+
         if (playerIndex == 1)
         {
             switch (lifeCount)
@@ -265,5 +279,27 @@ public class PlayerController : ObjectsOnGravity {
                     break;
             }
         }
+    }
+
+    private void tempInvincible(float invincibleTime)
+    {
+        // input 시간동안 깜빡거리면서 무적
+        isInvincible = true;
+        int flashTime = (int)(invincibleTime / flashIntervalSec);
+
+        StartCoroutine(Flasher(flashTime));
+    }
+
+    IEnumerator Flasher(int totalFlashTime)
+    {
+        for (int i = 0; i< totalFlashTime; i++)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            yield return new WaitForSeconds(flashIntervalSec);
+            GetComponent<SpriteRenderer>().enabled = true;
+            yield return new WaitForSeconds(flashIntervalSec);
+        }
+
+        isInvincible = false;
     }
 }
