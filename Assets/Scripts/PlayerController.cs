@@ -54,19 +54,20 @@ public class PlayerController : ObjectsOnGravity {
         // player_index = 1 -> BLACK
         // playeR_index = 2 -> WHITE
 
+        if (isOnGround)
+        {
+            animator.SetBool("isJump", false);
+        }
+        else
+        {
+            animator.SetBool("isJump", true);
+        }
+
 
         if (Input.touchCount < 1)
         {
             animator.SetBool("isWalk", false);
             return;
-        }
-
-       if (isOnGround)
-        {
-            animator.SetBool("isJump", false);
-        } else
-        {
-            animator.SetBool("isJump", true);
         }
 
         
