@@ -44,7 +44,6 @@ public class PlayerController : ObjectsOnGravity {
         lifeSprite = life.GetComponent<SpriteRenderer>();
     }
 	
-	// Update is called once per frame
 	public override void Update () {
         base.Update();
         getTouch();
@@ -230,14 +229,7 @@ public class PlayerController : ObjectsOnGravity {
         }
     }
 
-    private bool GameOver()
-    {
-        if (lifeCount == 0)
-            return true;
-        else
-            return false;
-    }
-
+    // 피격 시 라이프를 감소시킨 후 그에 따른 life sprite 변경.
     public void DestroyLife()
     {
         lifeCount -= 1;
@@ -247,7 +239,7 @@ public class PlayerController : ObjectsOnGravity {
             {
                 case 0:
                     lifeSprite.sprite = playerLife.blackLife0;
-                    GameOver();
+                    setDead();
                     return;
                 case 1:
                     lifeSprite.sprite = playerLife.blackLife1;
@@ -263,7 +255,7 @@ public class PlayerController : ObjectsOnGravity {
             {
                 case 0:
                     lifeSprite.sprite = playerLife.whiteLife0;
-                    GameOver();
+                    setDead();
                     return;
                 case 1:
                     lifeSprite.sprite = playerLife.whiteLife1;
