@@ -3,19 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class PlayerLife
+{
+    public Sprite blackLife0;
+    public Sprite blackLife1;
+    public Sprite blackLife2;
+    public Sprite whiteLife0;
+    public Sprite whiteLife1;
+    public Sprite whiteLife2;
+}
+
 public class PlayerController : ObjectsOnGravity {
     public int playerIndex;
     public float speed;
     public float jumpPower;
+    public int lifeCount;
 
     public GameObject shot;
     public Transform shotSpawn;
+    public GameObject life;
+    public PlayerLife playerLife;
+
     public float fireRate;
 
     private float nextFire = 0.0F;
-
     private bool isJumping = false;
     private Animator animator;
+    private SpriteRenderer lifeSprite;
+    
 
     // 이동 관련
     Vector3 movement;
@@ -25,9 +41,9 @@ public class PlayerController : ObjectsOnGravity {
     public override void Start () {
         base.Start();
         animator = GetComponent<Animator>();
+        lifeSprite = life.GetComponent<SpriteRenderer>();
     }
 	
-	// Update is called once per frame
 	public override void Update () {
         base.Update();
         getTouch();
@@ -39,7 +55,6 @@ public class PlayerController : ObjectsOnGravity {
         Jump();
         CheckOutOfMap();
     }
-
     
     private void getTouch()
     {
@@ -214,5 +229,41 @@ public class PlayerController : ObjectsOnGravity {
         }
     }
 
-    
+    // 피격 시 라이프를 감소시킨 후 그에 따른 life sprite 변경.
+    public void DestroyLife()
+    {
+        lifeCount -= 1;
+        if (playerIndex == 1)
+        {
+            switch (lifeCount)
+            {
+                case 0:
+                    lifeSprite.sprite = playerLife.blackLife0;
+                    setDead();
+                    return;
+                case 1:
+                    lifeSprite.sprite = playerLife.blackLife1;
+                    break;
+                case 2:
+                    lifeSprite.sprite = playerLife.blackLife2;
+                    break;
+            }
+        }
+        else
+        {
+            switch (lifeCount)
+            {
+                case 0:
+                    lifeSprite.sprite = playerLife.whiteLife0;
+                    setDead();
+                    return;
+                case 1:
+                    lifeSprite.sprite = playerLife.whiteLife1;
+                    break;
+                case 2:
+                    lifeSprite.sprite = playerLife.whiteLife2;
+                    break;
+            }
+        }
+    }
 }

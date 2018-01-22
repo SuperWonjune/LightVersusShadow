@@ -77,6 +77,12 @@ public class BulletController : ObjectsOnGravity
             Instantiate(destroyParticle, transform.position, transform.rotation);
             setDead();
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            setDead();
+            collision.gameObject.GetComponent<PlayerController>().DestroyLife();
+        }
     }
 
     // Player Controller로부터 터치 정보와 Player의 위치를 받아온 후,
