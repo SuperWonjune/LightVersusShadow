@@ -7,8 +7,10 @@ TagManager:
   - Fly
   - ObjectsGravityController
   - Platform
-  - Bullet
   - Platform Controller
+  - White Bullet
+  - Black Bullet
+  - Item
   layers:
   - Default
   - TransparentFX
