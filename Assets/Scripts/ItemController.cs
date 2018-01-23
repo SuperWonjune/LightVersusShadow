@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Item
 {
-    public bool isWorking = false;
     public float current = 0.0f;
 
     public int type;
@@ -23,6 +22,7 @@ public class ItemController : MonoBehaviour {
     private Item item;
     private Rigidbody2D itemRb2D;
     private SpriteRenderer itemRenderer;
+    private GameController gameController;
 
     //private List<Item> itemList;
 
@@ -33,12 +33,13 @@ public class ItemController : MonoBehaviour {
     public Sprite jumpItemSprite;
 
     private int itemType;
-    private const int RAPID_FIRE = 1;
-    private const int SUPER_JUMP = 2;
+    private const int RAPID_FIRE = 0;
+    private const int SUPER_JUMP = 1;
 
 	void Start ()
     {
         //itemList = new List<Item>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         StartCoroutine(CreateItem());
 	}
 	
