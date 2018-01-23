@@ -36,8 +36,11 @@ public class PlayerController : ObjectsOnGravity {
     private bool isInvincible = false;
     private float flashIntervalSec = 0.2f;
     private float invincibleTime = 1f;
-    
 
+    // 아이템 관련
+    private bool isItemApplied = false;
+    private Item appliedItem;
+    
     // 이동 관련
     Vector3 movement;
     float horizontalMove;
@@ -52,6 +55,16 @@ public class PlayerController : ObjectsOnGravity {
 	public override void Update () {
         base.Update();
         getTouch();
+
+        if (isItemApplied)
+        {
+            appliedItem.current += Time.deltaTime;
+            if (appliedItem.current > appliedItem.duration)
+            {
+                appliedItem.current = 0.0f;
+                RemoveItem(appliedItem);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -243,7 +256,6 @@ public class PlayerController : ObjectsOnGravity {
             return;
         }
 
-
         lifeCount -= 1;
         tempInvincible(invincibleTime);
 
@@ -301,5 +313,41 @@ public class PlayerController : ObjectsOnGravity {
         }
 
         isInvincible = false;
+    }
+
+    // 아이템 적용
+    public void ApplyItem(Item item)
+    {
+        appliedItem = item;
+
+        switch (item.type)
+        {
+            case 1:
+                fireRate /= 3;
+                break;
+            case 2:
+                jumpPower += 2;
+                break;
+        }
+
+        isItemApplied = true;
+        Debug.Log("Item Applied!");
+    }
+
+    private void RemoveItem(Item item)
+    {
+        switch (item.type)
+        {
+            case 1:
+                fireRate *= 3;
+                break;
+            case 2:
+                jumpPower -= 2;
+                break;
+        }
+
+        appliedItem = null;
+        isItemApplied = false;
+        Debug.Log("Item Effect Removed");
     }
 }
