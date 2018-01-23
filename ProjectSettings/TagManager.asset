@@ -14,6 +14,8 @@ TagManager:
   - Angel
   - Devil
   - Item Controller
+  - Black Portal
+  - White Portal
   layers:
   - Default
   - TransparentFX
