@@ -9,7 +9,9 @@ public class GameController : MonoBehaviour {
     private bool isGameOver = false;
 
 	void Start () {
-	}
+        replayButton = GameObject.FindGameObjectWithTag("ReplayButton").GetComponent<Button>();
+        setGameOn();
+    }
 	
 	void Update () {
 
@@ -18,6 +20,7 @@ public class GameController : MonoBehaviour {
     public void setGameOver()
     {
         isGameOver = true;
+        replayButton.gameObject.SetActive(true);
     }
     public void setGameOn()
     {

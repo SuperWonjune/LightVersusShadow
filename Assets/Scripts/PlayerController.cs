@@ -61,6 +61,12 @@ public class PlayerController : ObjectsOnGravity {
 	
 	public override void Update () {
         base.Update();
+
+        if (gameController.checkIsGameOver())
+        {
+            return;
+        }
+
         getTouch();
 
         if (isItemApplied)
@@ -76,6 +82,11 @@ public class PlayerController : ObjectsOnGravity {
 
     private void FixedUpdate()
     {
+        if (gameController.checkIsGameOver())
+        {
+            return;
+        }
+
         Move();
         Jump();
         CheckOutOfMap();
@@ -217,6 +228,9 @@ public class PlayerController : ObjectsOnGravity {
         }
 
         Instantiate(destroyParticle, transform.position, Quaternion.identity);
+
+        // 게임 오버 호출
+        gameController.setGameOver();
 
         setDead();
     }
