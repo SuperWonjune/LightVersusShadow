@@ -1161,6 +1161,8 @@ MonoBehaviour:
   itemPeriod: 10
   itemContainer: {fileID: 1452609574751980, guid: f82ab909108927347b99f11bcd910b86,
     type: 2}
+  rapidItemSprite: {fileID: 21300000, guid: 1630ab7359dee834a91440408335b9c3, type: 3}
+  jumpItemSprite: {fileID: 21300000, guid: 93c98b255a57d824a9e3a76382fa0158, type: 3}
 --- !u!1001 &2139661072
 Prefab:
   m_ObjectHideFlags: 0

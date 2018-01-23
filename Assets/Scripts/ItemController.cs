@@ -29,6 +29,8 @@ public class ItemController : MonoBehaviour {
     public float speed;
     public int itemPeriod;
     public GameObject itemContainer;
+    public Sprite rapidItemSprite;
+    public Sprite jumpItemSprite;
 
     private int itemType;
     private const int RAPID_FIRE = 1;
@@ -42,6 +44,7 @@ public class ItemController : MonoBehaviour {
 	
     IEnumerator CreateItem()
     {
+        yield return new WaitForSeconds(3);
         while (true)
         {
             itemType = Random.Range(1, 3);
@@ -53,12 +56,13 @@ public class ItemController : MonoBehaviour {
 
             switch (itemType)
             {
+                
                 case RAPID_FIRE:
-                    //itemRenderer.sprite = null;
+                    itemRenderer.sprite = rapidItemSprite;
                     Debug.Log("It's RAPID FIRE");
                     break;
                 case SUPER_JUMP:
-                    //itemRenderer.sprite = null;
+                    itemRenderer.sprite = jumpItemSprite;
                     Debug.Log("It's SUPER JUMP");
                     break;
             }
