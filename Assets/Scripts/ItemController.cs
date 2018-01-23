@@ -40,6 +40,7 @@ public class ItemController : MonoBehaviour {
         //itemList = new List<Item>();
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         itemList = new List<string>();
+        initializeList(itemList);
         StartCoroutine(CreateItem());
 	}
 	
@@ -58,7 +59,6 @@ public class ItemController : MonoBehaviour {
 
                 switch (itemType)
                 {
-
                     case "Rapid Fire":
                         itemRenderer.sprite = rapidItemSprite;
                         break;
@@ -66,8 +66,8 @@ public class ItemController : MonoBehaviour {
                         itemRenderer.sprite = jumpItemSprite;
                         break;
                 }
-
                 itemRb2D.velocity = new Vector2(0.0f, -1.0f) * speed;
+
                 yield return new WaitForSeconds(itemPeriod);
             }
         }
