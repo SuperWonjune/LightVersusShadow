@@ -17,7 +17,7 @@ public class GroundChecker : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D collision)
     {
         // player 접촉시
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Angel" || collision.gameObject.tag == "Devil")
         {
             // 컨트롤러 획득
             objectsOnGravity = collision.GetComponent<ObjectsOnGravity>();
@@ -30,7 +30,7 @@ public class GroundChecker : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision)
     {
         // player 접촉 해제시
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Angel" || collision.gameObject.tag == "Devil")
         {
             // 컨트롤러 획득
             objectsOnGravity = collision.GetComponent<ObjectsOnGravity>();

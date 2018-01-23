@@ -2,63 +2,75 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemController : MonoBehaviour {
-    private Rigidbody2D rb2D;
-    private Collider2D col2D;
-    private SpriteRenderer spriteRenderer;
+public class Item
+{
+    public bool isWorking = false;
+    public float current = 0.0f;
 
-    public int speed;
+    public int type;
+    public float duration;
+    public GameObject itemObject;
+
+    public Item(int itemType, float durationTime, GameObject itemObj)
+    {
+        duration = durationTime;
+        type = itemType;
+        itemObject = itemObj;
+    }
+}
+
+public class ItemController : MonoBehaviour {
+    private Item item;
+    private Rigidbody2D itemRb2D;
+    private SpriteRenderer itemRenderer;
+
+    //private List<Item> itemList;
+
+    public float speed;
+    public int itemPeriod;
+    public GameObject itemContainer;
 
     private int itemType;
     private const int RAPID_FIRE = 1;
+    private const int SUPER_JUMP = 2;
 
 	void Start ()
     {
-        rb2D = GetComponent<Rigidbody2D>();
-        col2D = GetComponent<Collider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        //rb2D.velocity = new Vector2(0.0f, -1.0f) * speed;
-        itemType = 0;
+        //itemList = new List<Item>();
+        StartCoroutine(CreateItem());
 	}
 	
-	void Update ()
+    IEnumerator CreateItem()
     {
-		
-	}
-
-    private void FixedUpdate()
-    {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
-        if (collision.gameObject.CompareTag("Black Bullet"))
+        while (true)
         {
-            // 검은색 플레이어에게 아이템 제공
-            print("I'm Devil's");
-        }
-        else
-        {
-            // 하얀색 플레이어에게 아이템 제공
-            print("I'm Angel's");
+            itemType = Random.Range(1, 3);
+            GameObject itemObj = Instantiate(itemContainer, transform.position, transform.rotation);
+            item = new Item(itemType, 5.0f, itemObj);
+            
+            itemRb2D = item.itemObject.GetComponent<Rigidbody2D>();
+            itemRenderer = item.itemObject.GetComponent<SpriteRenderer>();
+
+            switch (itemType)
+            {
+                case RAPID_FIRE:
+                    //itemRenderer.sprite = null;
+                    Debug.Log("It's RAPID FIRE");
+                    break;
+                case SUPER_JUMP:
+                    //itemRenderer.sprite = null;
+                    Debug.Log("It's SUPER JUMP");
+                    break;
+            }
+
+            itemRb2D.velocity = new Vector2(0.0f, -1.0f) * speed;
+            yield return new WaitForSeconds(itemPeriod);
         }
     }
 
-    // 누구에게 줄 지, 어떤 아이템인지 판단 필요
-    private void ApplyItem(int playerIndex, int type)
+    public Item GetItem()
     {
-
-        // 첫 플레이어 이후는 무시하도록 트리거 설정 해제.
-        col2D.isTrigger = false;
-    }
-
-    public void CreateItem(int type)
-    {
-        itemType = type;
-        
+        return item;
     }
 
 }

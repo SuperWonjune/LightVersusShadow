@@ -11,6 +11,9 @@ TagManager:
   - White Bullet
   - Black Bullet
   - Item
+  - Angel
+  - Devil
+  - Item Controller
   layers:
   - Default
   - TransparentFX

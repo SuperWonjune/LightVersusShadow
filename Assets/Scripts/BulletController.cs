@@ -78,7 +78,7 @@ public class BulletController : ObjectsOnGravity
             setDead();
         }
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Angel") || collision.gameObject.CompareTag("Devil"))
         {
             setDead();
             collision.gameObject.GetComponent<PlayerController>().DestroyLife();
