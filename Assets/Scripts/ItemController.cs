@@ -47,7 +47,7 @@ public class ItemController : MonoBehaviour {
         yield return new WaitForSeconds(3);
         while (true)
         {
-            itemType = Random.Range(1, 3);
+            itemType %= 2;
             GameObject itemObj = Instantiate(itemContainer, transform.position, transform.rotation);
             item = new Item(itemType, 5.0f, itemObj);
             
@@ -59,14 +59,13 @@ public class ItemController : MonoBehaviour {
                 
                 case RAPID_FIRE:
                     itemRenderer.sprite = rapidItemSprite;
-                    Debug.Log("It's RAPID FIRE");
                     break;
                 case SUPER_JUMP:
                     itemRenderer.sprite = jumpItemSprite;
-                    Debug.Log("It's SUPER JUMP");
                     break;
             }
 
+            itemType++;
             itemRb2D.velocity = new Vector2(0.0f, -1.0f) * speed;
             yield return new WaitForSeconds(itemPeriod);
         }

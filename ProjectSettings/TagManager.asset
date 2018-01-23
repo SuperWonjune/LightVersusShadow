@@ -15,6 +15,8 @@ TagManager:
   - Devil
   - Item Controller
   - SoundEffectManager
+  - Black Portal
+  - White Portal
   layers:
   - Default
   - TransparentFX

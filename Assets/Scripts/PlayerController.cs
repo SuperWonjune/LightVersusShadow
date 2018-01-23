@@ -358,7 +358,6 @@ public class PlayerController : ObjectsOnGravity {
         }
 
         isItemApplied = true;
-        Debug.Log("Item Applied!");
     }
 
     private void RemoveItem(Item item)
@@ -375,7 +374,6 @@ public class PlayerController : ObjectsOnGravity {
 
         appliedItem = null;
         isItemApplied = false;
-        Debug.Log("Item Effect Removed");
     }
 
     private void OnDestroy()
