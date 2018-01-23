@@ -6,6 +6,7 @@ public class PlatformController : MonoBehaviour {
     public GameObject whitePlatform;
     public GameObject blackPlatform;
 
+    private AudioSource newAudio;
     private List<GameObject> platformList;
     private int platformUpdateFlag;
     private const int LEFT = 0;
@@ -17,6 +18,7 @@ public class PlatformController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         platformList = new List<GameObject>();
+        newAudio = gameObject.AddComponent<AudioSource>();
         StartCoroutine(generatePlatforms());
         platformUpdateFlag = 1;
     }
@@ -133,6 +135,7 @@ public class PlatformController : MonoBehaviour {
     // 외부 Object와 충돌로 파괴되었을 때 호출.
     public void removePlatform(GameObject platform)
     {
+        newAudio.PlayOneShot((AudioClip)Resources.Load("ObjectsDestroyed"));
         platformList.Remove(platform);
         Destroy(platform);
     }

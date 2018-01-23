@@ -20,10 +20,14 @@ public class PlayerController : ObjectsOnGravity {
     public float jumpPower;
     public int lifeCount;
 
+    public GameController gameController;
     public GameObject shot;
     public Transform shotSpawn;
     public GameObject life;
     public PlayerLife playerLife;
+
+    public GameObject BlackDeathSparkle;
+    public GameObject WhiteDeathSparkle;
 
     public float fireRate;
 
@@ -31,6 +35,7 @@ public class PlayerController : ObjectsOnGravity {
     private bool isJumping = false;
     private Animator animator;
     private SpriteRenderer lifeSprite;
+    private AudioSource newAudio;
 
     // 피격 관련
     private bool isInvincible = false;
@@ -50,6 +55,8 @@ public class PlayerController : ObjectsOnGravity {
         base.Start();
         animator = GetComponent<Animator>();
         lifeSprite = life.GetComponent<SpriteRenderer>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        newAudio = gameObject.AddComponent<AudioSource>();
     }
 	
 	public override void Update () {
@@ -229,6 +236,7 @@ public class PlayerController : ObjectsOnGravity {
             jumpDriection = 1;
         }
 
+        newAudio.PlayOneShot((AudioClip)Resources.Load("JumpSound"));
         rb2D.AddForce(Vector2.left * jumpPower * jumpDriection, ForceMode2D.Impulse);
         
 
@@ -256,6 +264,7 @@ public class PlayerController : ObjectsOnGravity {
             return;
         }
 
+        newAudio.PlayOneShot((AudioClip)Resources.Load("HitByBullet"));
         lifeCount -= 1;
         tempInvincible(invincibleTime);
 
@@ -350,4 +359,23 @@ public class PlayerController : ObjectsOnGravity {
         isItemApplied = false;
         Debug.Log("Item Effect Removed");
     }
+
+    private void OnDestroy()
+    {
+        // 파괴 particle 생성
+        GameObject destroyParticle;
+
+        // 흑
+        if (playerIndex == 1)
+        {
+            destroyParticle = BlackDeathSparkle;
+        }
+        else
+        {
+            destroyParticle = WhiteDeathSparkle;
+        }
+
+        Instantiate(destroyParticle, transform.position, Quaternion.identity);
+    }
+
 }
