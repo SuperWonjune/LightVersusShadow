@@ -24,7 +24,6 @@ public class ApplyItemByBullet : MonoBehaviour {
         {
             // 검은색 플레이어에게 아이템 제공
             devil.ApplyItem(item);
-            Debug.Log("I'm Devil's");
             collision.gameObject.GetComponent<ObjectsOnGravity>().setDead();
             Destroy(gameObject);
         }
@@ -32,7 +31,6 @@ public class ApplyItemByBullet : MonoBehaviour {
         {
             // 하얀색 플레이어에게 아이템 제공
             angel.ApplyItem(item);
-            Debug.Log("I'm Angel's");
             col2D.isTrigger = false;
             collision.gameObject.GetComponent<ObjectsOnGravity>().setDead();
             Destroy(gameObject);
