@@ -17,6 +17,7 @@ TagManager:
   - SoundEffectManager
   - Black Portal
   - White Portal
+  - ReplayButton
   layers:
   - Default
   - TransparentFX
