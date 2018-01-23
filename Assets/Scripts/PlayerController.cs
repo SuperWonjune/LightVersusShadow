@@ -369,10 +369,10 @@ public class PlayerController : ObjectsOnGravity {
 
         switch (item.type)
         {
-            case 1:
+            case "Rapid Fire":
                 fireRate /= 3;
                 break;
-            case 2:
+            case "Super Jump":
                 jumpPower += 2;
                 break;
         }
@@ -384,10 +384,10 @@ public class PlayerController : ObjectsOnGravity {
     {
         switch (item.type)
         {
-            case 1:
+            case "Rapid Fire":
                 fireRate *= 3;
                 break;
-            case 2:
+            case "Super Jump":
                 jumpPower -= 2;
                 break;
         }
