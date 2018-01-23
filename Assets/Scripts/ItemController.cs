@@ -6,11 +6,11 @@ public class Item
 {
     public float current = 0.0f;
 
-    public int type;
+    public string type;
     public float duration;
     public GameObject itemObject;
 
-    public Item(int itemType, float durationTime, GameObject itemObj)
+    public Item(string itemType, float durationTime, GameObject itemObj)
     {
         duration = durationTime;
         type = itemType;
@@ -32,14 +32,14 @@ public class ItemController : MonoBehaviour {
     public Sprite rapidItemSprite;
     public Sprite jumpItemSprite;
 
-    private int itemType;
-    private const int RAPID_FIRE = 0;
-    private const int SUPER_JUMP = 1;
+    private string itemType;
+    private List<string> itemList;
 
 	void Start ()
     {
         //itemList = new List<Item>();
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        itemList = new List<string>();
         StartCoroutine(CreateItem());
 	}
 	
@@ -48,28 +48,35 @@ public class ItemController : MonoBehaviour {
         yield return new WaitForSeconds(3);
         while (true)
         {
-            itemType %= 2;
-            GameObject itemObj = Instantiate(itemContainer, transform.position, transform.rotation);
-            item = new Item(itemType, 5.0f, itemObj);
-            
-            itemRb2D = item.itemObject.GetComponent<Rigidbody2D>();
-            itemRenderer = item.itemObject.GetComponent<SpriteRenderer>();
-
-            switch (itemType)
+            foreach (string itemType in itemList)
             {
-                
-                case RAPID_FIRE:
-                    itemRenderer.sprite = rapidItemSprite;
-                    break;
-                case SUPER_JUMP:
-                    itemRenderer.sprite = jumpItemSprite;
-                    break;
-            }
+                GameObject itemObj = Instantiate(itemContainer, transform.position, transform.rotation);
+                item = new Item(itemType, 5.0f, itemObj);
 
-            itemType++;
-            itemRb2D.velocity = new Vector2(0.0f, -1.0f) * speed;
-            yield return new WaitForSeconds(itemPeriod);
+                itemRb2D = item.itemObject.GetComponent<Rigidbody2D>();
+                itemRenderer = item.itemObject.GetComponent<SpriteRenderer>();
+
+                switch (itemType)
+                {
+
+                    case "Rapid Fire":
+                        itemRenderer.sprite = rapidItemSprite;
+                        break;
+                    case "Super Jump":
+                        itemRenderer.sprite = jumpItemSprite;
+                        break;
+                }
+
+                itemRb2D.velocity = new Vector2(0.0f, -1.0f) * speed;
+                yield return new WaitForSeconds(itemPeriod);
+            }
         }
+    }
+
+    private void initializeList(List<string> itemList)
+    {
+        itemList.Add("Rapid Fire");
+        itemList.Add("Super Jump");
     }
 
     public Item GetItem()
