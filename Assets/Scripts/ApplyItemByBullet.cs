@@ -37,7 +37,6 @@ public class ApplyItemByBullet : MonoBehaviour {
             soundEffectManager.playSound("GotItem");
             // 하얀색 플레이어에게 아이템 제공
             angel.ApplyItem(item);
-            col2D.isTrigger = false;
             collision.gameObject.GetComponent<ObjectsOnGravity>().setDead();
             Destroy(gameObject);
         }

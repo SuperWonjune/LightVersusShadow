@@ -8,6 +8,8 @@ public class PlatformController : MonoBehaviour {
 
     private AudioSource newAudio;
     private List<GameObject> platformList;
+    private GameController gameController;
+
     private int platformUpdateFlag;
     private const int LEFT = 0;
     private const int MIDDLE_LEFT = 1;    
@@ -19,6 +21,8 @@ public class PlatformController : MonoBehaviour {
     void Start () {
         platformList = new List<GameObject>();
         newAudio = gameObject.AddComponent<AudioSource>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
         StartCoroutine(generatePlatforms());
         platformUpdateFlag = 1;
     }

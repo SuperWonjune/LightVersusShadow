@@ -22,6 +22,7 @@ public class BulletController : ObjectsOnGravity
     private float createdY;
     private float aimedX;
     private float aimedY;
+    private bool isPassedPortal;
 
     public void Awake()
     {
@@ -34,6 +35,7 @@ public class BulletController : ObjectsOnGravity
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
         platformController = GameObject.FindGameObjectWithTag("Platform Controller").GetComponent<PlatformController>();
+        isPassedPortal = false;
 
         // 총알 trail 생성
         InvokeRepeating("CreateTrail", 0.2f, 0.2f);
@@ -134,5 +136,15 @@ public class BulletController : ObjectsOnGravity
         }
 
         Instantiate(destroyParticle, transform.position, Quaternion.identity);
+    }
+
+    public void SetIsPassedPortal(bool value)
+    {
+        isPassedPortal = value;
+    }
+
+    public bool GetIsPassedPortal()
+    {
+        return isPassedPortal;
     }
 }
