@@ -79,6 +79,7 @@ public class PlayerController : ObjectsOnGravity {
         Move();
         Jump();
         CheckOutOfMap();
+        ClampPositionInGame();
     }
     
     private void getTouch()
@@ -216,7 +217,24 @@ public class PlayerController : ObjectsOnGravity {
         
         Vector2 movement = new Vector2(rb2D.velocity.x, horizontalMove * speed);
         rb2D.velocity =  movement;
+        
+    }
 
+    private void ClampPositionInGame()
+    {
+        // 각 플레이어의 이동 반경 제한
+        Vector2 pos = transform.position;
+
+        // 흑
+        if (playerIndex == 1)
+        {
+            pos.x = Mathf.Clamp(transform.position.x, -7, -0.5f);
+        }
+        else
+        {
+            pos.x = Mathf.Clamp(transform.position.x, 0.5f, 7);
+        }
+        transform.position = pos;
     }
 
     private void Jump()
