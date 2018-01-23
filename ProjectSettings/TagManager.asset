@@ -15,6 +15,7 @@ TagManager:
   - Devil
   - Item Controller
   - SoundEffectManager
+  - ReplayButton
   layers:
   - Default
   - TransparentFX

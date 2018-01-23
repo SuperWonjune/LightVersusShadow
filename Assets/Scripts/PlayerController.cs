@@ -201,6 +201,26 @@ public class PlayerController : ObjectsOnGravity {
         }
     }
 
+    private void setPlayerDead()
+    {
+        // 파괴 particle 생성
+        GameObject destroyParticle;
+
+        // 흑
+        if (playerIndex == 1)
+        {
+            destroyParticle = BlackDeathSparkle;
+        }
+        else
+        {
+            destroyParticle = WhiteDeathSparkle;
+        }
+
+        Instantiate(destroyParticle, transform.position, Quaternion.identity);
+
+        setDead();
+    }
+
     private void Shoot(float touchXPos, float touchYPos)
     {
         if (Time.time > nextFire)
@@ -292,7 +312,7 @@ public class PlayerController : ObjectsOnGravity {
             {
                 case 0:
                     lifeSprite.sprite = playerLife.blackLife0;
-                    setDead();
+                    setPlayerDead();
                     return;
                 case 1:
                     lifeSprite.sprite = playerLife.blackLife1;
@@ -308,7 +328,7 @@ public class PlayerController : ObjectsOnGravity {
             {
                 case 0:
                     lifeSprite.sprite = playerLife.whiteLife0;
-                    setDead();
+                    setPlayerDead();
                     return;
                 case 1:
                     lifeSprite.sprite = playerLife.whiteLife1;
@@ -376,24 +396,6 @@ public class PlayerController : ObjectsOnGravity {
         appliedItem = null;
         isItemApplied = false;
         Debug.Log("Item Effect Removed");
-    }
-
-    private void OnDestroy()
-    {
-        // 파괴 particle 생성
-        GameObject destroyParticle;
-
-        // 흑
-        if (playerIndex == 1)
-        {
-            destroyParticle = BlackDeathSparkle;
-        }
-        else
-        {
-            destroyParticle = WhiteDeathSparkle;
-        }
-
-        Instantiate(destroyParticle, transform.position, Quaternion.identity);
     }
 
 }

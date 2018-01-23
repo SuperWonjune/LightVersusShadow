@@ -1,31 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
+    public Button replayButton;
 
-    private bool isQuitting = false;
     private bool isGameOver = false;
 
 	void Start () {
 	}
 	
 	void Update () {
-		if (isGameOver)
-        {
-            
-        }
 
 	}
-
-    public bool getIsQuitting()
-    {
-        return isQuitting;
-    }
 
     public void setGameOver()
     {
         isGameOver = true;
+    }
+    public void setGameOn()
+    {
+        isGameOver = false;
     }
 
     public bool checkIsGameOver()
