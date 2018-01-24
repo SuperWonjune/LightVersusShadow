@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
     private GameObject replayButton;
+    private CameraController cameraController;
 
     private bool isGameOver = false;
 
 	void Start () {
         replayButton = GameObject.FindGameObjectWithTag("ReplayButton");
+        cameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         setGameOn();
     }
 	
@@ -24,6 +26,7 @@ public class GameController : MonoBehaviour {
     {
         isGameOver = true;
         replayButton.SetActive(true);
+        cameraController.StopMusic();
     }
     public void setGameOn()
     {
