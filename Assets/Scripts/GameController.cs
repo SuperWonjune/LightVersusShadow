@@ -4,27 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
-    public Button replayButton;
+    private GameObject replayButton;
 
     private bool isGameOver = false;
 
 	void Start () {
-        replayButton = GameObject.FindGameObjectWithTag("ReplayButton").GetComponent<Button>();
+        replayButton = GameObject.FindGameObjectWithTag("ReplayButton");
         setGameOn();
     }
 	
 	void Update () {
-
-	}
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 
     public void setGameOver()
     {
         isGameOver = true;
-        replayButton.gameObject.SetActive(true);
+        replayButton.SetActive(true);
     }
     public void setGameOn()
     {
         isGameOver = false;
+        replayButton.SetActive(false);
     }
 
     public bool checkIsGameOver()

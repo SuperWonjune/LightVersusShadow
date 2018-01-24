@@ -70,3 +70,9 @@ TagManager:
   - name: Players
     uniqueID: 2719818085
     locked: 0
+  - name: UI
+    uniqueID: 2704856875
+    locked: 0
+  - name: UI Text
+    uniqueID: 1448618931
+    locked: 0
