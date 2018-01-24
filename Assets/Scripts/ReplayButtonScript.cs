@@ -8,12 +8,14 @@ public class ReplayButtonScript : MonoBehaviour {
 
     private GameController gameController;
 
-    private Button restartButton;
+    private Button replayButton;
 
     void Start () {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        restartButton = GameObject.FindGameObjectWithTag("ReplayButton").GetComponent<Button>();
-        restartButton.onClick.AddListener(() => onRestartButtonClick());
+        replayButton = GameObject.FindGameObjectWithTag("ReplayButton").GetComponent<Button>();
+
+        replayButton.onClick.AddListener(() => onRestartButtonClick());
+        replayButton.gameObject.SetActive(false);
     }
 
     private void onRestartButtonClick()
